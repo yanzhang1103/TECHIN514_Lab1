@@ -1,9 +1,69 @@
 # TECHIN514_Lab1
-Proximity Gauge
+Proximity-Based Alert & Visualization System
 
-Proximity Gauge is a two-device system that senses how close an object is and visualizes that proximity using a physical gauge. A handheld sensing device measures distance using an infrared sensor and wirelessly sends a processed proximity level to a separate gauge display, where a stepper-motor-driven needle and LEDs provide intuitive, non-screen-based feedback.
+A two-device proximity sensing system that detects how close an object or person is and provides intuitive physical feedback through a gauge needle and LED indicators. The system focuses on translating continuous proximity data into stable, non-screen-based feedback that can support spatial awareness and proximity alerts.
 
-General physical form:
-The system consists of a compact handheld sensing device shaped like a professional measurement tool, and a standalone circular gauge display. The sensing device features a front-facing IR sensor window, a small status LED, and a USB power port. The display device includes a circular dial with a moving needle, indicator LEDs, and a physical switch for power or mode control.
+1. Sensor Device: Handheld Proximity Sensor
 
-General sketch (conceptual):
+The sensor device is a compact, handheld proximity-sensing unit designed to detect nearby objects and transmit processed proximity data wirelessly to a separate display device. It emphasizes directional sensing and portable, battery-powered operation.
+
+Hardware Components
+
+Microcontroller: ESP32-C3 (Bluetooth Low Energy)
+
+Distance Sensor: Sharp GP2Y0A21YK0F infrared distance sensor
+
+Status Indicator: LED
+
+Battery: 3.7V LiPo battery
+
+Power Control: Slide switch
+
+How It Works
+
+The infrared distance sensor continuously measures the distance between the device and nearby objects. The ESP32-C3 samples the analog sensor output and applies basic digital signal processing, including smoothing and thresholding, to reduce noise and generate a stable proximity level. This processed proximity data is transmitted to the display device using Bluetooth Low Energy (BLE).
+
+Power Design
+
+The sensor device is battery-powered using a 3.7V LiPo battery. Low-power operation is supported through intermittent sampling and BLE communication, making the device suitable for portable use.
+
+2. Display Device: Proximity Gauge Display
+
+The display device is a standalone physical interface that visualizes proximity information received from the sensor device. It provides continuous, intuitive feedback through a moving gauge needle and LED indicators.
+
+Hardware Components
+
+Microcontroller: ESP32-C3
+
+Actuator: Stepper motor driving a gauge needle
+
+Motor Driver: ULN2003
+
+Visual Indicator: LED
+
+User Input: Physical button / switch
+
+Battery: 3.7V LiPo battery
+
+How It Works
+
+The display device receives proximity data from the sensor device via BLE. The ESP32-C3 maps the received proximity value to a corresponding needle angle and controls the stepper motor to move the gauge needle accordingly. LEDs provide additional status feedback, such as indicating safe or alert proximity ranges.
+
+User Interaction
+
+A physical button or switch allows basic user interaction, such as powering the device on or switching operating modes. The display continuously reflects proximity changes without requiring screen-based interaction.
+
+3. System Architecture
+3.1 Communication Diagram
+
+The system consists of two independent, battery-powered devices connected via Bluetooth Low Energy. The sensor device acts as the BLE server, while the display device functions as the BLE client, receiving proximity updates in real time.
+
+3.2 Workflow
+
+The sensor device measures distance using the IR sensor.
+
+Raw sensor data is filtered and processed on the ESP32-C3.
+
+Processed proximity data is transmitted via BLE.
+
+The display device receives the data and updates the gauge needle and LEDs accordingly.
