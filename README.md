@@ -45,6 +45,10 @@ User Input: Physical button / switch
 
 Battery: 3.7V LiPo battery
 
+Sketch
+![sketch](https://github.com/user-attachments/assets/3f74d47c-5d92-4212-a854-cd29027f152b)
+
+
 How It Works
 
 The display device receives proximity data from the sensor device via BLE. The ESP32-C3 maps the received proximity value to a corresponding needle angle and controls the stepper motor to move the gauge needle accordingly. LEDs provide additional status feedback, such as indicating safe or alert proximity ranges.
@@ -59,6 +63,11 @@ A physical button or switch allows basic user interaction, such as powering the 
 The system consists of two independent, battery-powered devices connected via Bluetooth Low Energy. The sensor device acts as the BLE server, while the display device functions as the BLE client, receiving proximity updates in real time.
 
 3.2 Workflow
+![workflow](https://github.com/user-attachments/assets/2d046adb-15eb-4f32-b05e-80aa41b27e37)
+
+diagram
+![diagram](https://github.com/user-attachments/assets/faebd0c1-51a2-4e58-a2c8-28e8386782d8)
+
 
 The sensor device measures distance using the IR sensor.
 
